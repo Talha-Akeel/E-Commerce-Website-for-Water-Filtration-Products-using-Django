@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main class="container mt-5">
+	<div class="row">
+        {% for product in data %}
+				<div class="col-lg-4 col-md-6 mb-4 product-box">
+					<div class="card shadow">
+					  <a href="/product-detail/{{product.slug}}/{{product.id}}"><img src="/media/{{product.image}}" class="card-img-top" alt="{{product.product_name}}"></a>
+					  <div class="card-body">
+					    <h5 class="card-text"><a href="/product-detail/{{product.slug}}/{{product.id}}">{{product.product_name}}</a></h5>
+					    <p class="card-text">Rs : <span class="product-price-{{product.id}}">{{product.price}}</span></p>
+					  </div>
+					  <div class="card-footer">
+						<input type="hidden" value="1" class="control-form product-quantity-{{product.id}}" id="product-quantity" />
+						<input type="hidden" class="product-image-{{product.id}}" value="{{product.image}}" />
+						<input type="hidden" class="product-id-{{product.id}}" value="{{product.id}}" />
+						<input type="hidden" class="product-name-{{product.id}}" value="{{product.product_name}}" />
+						<button class="btn btn-sm btn-primary add-to-cart-button" data-index={{product.id}}></i>&nbsp;Add to Cart</button>
+						{% comment %} <button class="btn btn-sm btn-danger"></i>&nbsp;Add to WishList</button> {% endcomment %}
+					</div>
+					</div>
+				</div>
+        {% endfor %}
+    
+
+    </div>
+</main>
+<script type="text/javascript" src="{% static 'custom.js' %}"></script>
+{% endblock %}

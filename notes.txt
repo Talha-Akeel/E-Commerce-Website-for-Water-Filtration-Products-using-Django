@@ -1,0 +1,27 @@
+//////////////////////////////////////////  E-commerce website ( Water Filtration )  ////////////////////////////////
+
+=> We will use;
+               (1) Django Framework
+               (2) SQLite Database
+               (3) Bootstrap ( CSS framework )
+               (4) jQuery
+               (5) VS code ( IDE )
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+=> install python if not
+=> install virtual environment : pip install virtualenv
+=> create virtual environment : py -m venv env
+=> activate virtual environment : .\env\Scripts\activate
+=> install Django : pip install django
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+=> create project : django-admin startproject waterFiltration
+=> Go to project
+=> create main application : py manage.py startapp main
+=> now start the app : py manage.py runserver
+=> migrate : py manage.py migrate
+=> create admin-panel : py manage.py createsuperuser
+=> enter user name(WaterFiltration), email and password(AqeelAhmad@Water).
+

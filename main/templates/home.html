@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+{% comment %} Carousal start  {% endcomment %}
+
+<div class="container-fluid mt-2  mb-5">
+ <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      {% for banner in banners %}
+        {% if forloop.counter == 1 %}
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{forloop.counter}}" class="active" aria-current="true" aria-label="Slide 1"></button>
+      {% else %}
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{forloop.counter}}" aria-current="true" aria-label="Slide 1"></button>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="carousel-inner">
+      {% for banner in banners %}
+        {% if forloop.counter == 1 %}
+      <div class="carousel-item active">
+      {% else %}
+    <div class="carousel-item">
+      {% endif %}
+      <img src="/media/{{banner.banner_img}}" class="d-block w-100 img-fluid" alt="...">
+    </div>
+    {% endfor %}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+</div>
+
+{% comment %} Carousal ends {% endcomment %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <h1 class=text-center>Featured Products</h1>
+    </div>
+    <div class="col-4">
+      <form class="d-flex" action="/search">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search" />
+          <button class="btn btn-success" type="submit" id="button-addon2">Search</button>
+        </div>
+      </form>
+    </div>
+    
+  </div>
+  <hr class="hr">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for product in data %}
+    <div class="col">
+      <div class="product-card card">
+        <a href="/product-detail/{{product.slug}}/{{product.id}}"><img src="/media/{{product.image}}" class="card-img-top" alt="{{product.product_name}}"></a>
+        <div class="card-body">
+          <h5 class="card-title"><a href="/product-detail/{{product.slug}}/{{product.id}}">{{product.product_name}}</a></h5>
+          <p class="card-text">Rs : <span class="product-price-{{product.id}}">{{product.price}}</span></p>
+        </div>
+        <div class="card-footer">
+          <input type="hidden" value="1" class="control-form product-quantity-{{product.id}}" id="product-quantity" />
+          <input type="hidden" class="product-image-{{product.id}}" value="{{product.image}}" />
+          <input type="hidden" class="product-id-{{product.id}}" value="{{product.id}}" />
+          <input type="hidden" class="product-name-{{product.id}}" value="{{product.product_name}}" />
+          <button class="btn btn-sm btn-primary add-to-cart-button" data-index={{product.id}}></i>&nbsp;Add to Cart</button>
+          {% comment %} <button class="btn btn-sm btn-danger"></i>&nbsp;Add to WishList</button> {% endcomment %}
+      </div>
+      </div>
+    </div>
+    {% endfor %}
+    </div>
+    <div class="row d-flex justify-content-center mb-5 mt-5">
+      <a href="/product-list/"><button class="btn btn-primary w-25">All Products ------></button></a>
+    </div>
+</div>
+<script type="text/javascript" src="{% static 'custom.js' %}"></script>
+{% endblock %}

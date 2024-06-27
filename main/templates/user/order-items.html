@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main class="container mt-5">
+	<h1>Order Details</h1>
+	<div class="row">
+		<div class="col-md-3">
+			{% include 'user/user-sidebar.html' %}
+		</div>
+		<div class="col-md-9">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Invoice No</th>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in orderItems %}
+                        <tr>
+                            <td>{{item.invoice_no}}</td>
+                            <td> 
+                                {{item.item}}
+                                <p><img src="/media/{{item.image}}" width="80" /></p>
+                            </td>
+                            <td>{{item.quantity}}</td>
+                            <td>{{item.price}}</td>
+                            <td>{{item.total}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+		</div>
+    </div>
+</main>
+<script type="text/javascript" src="{% static 'custom.js' %}"></script>
+{% endblock %}

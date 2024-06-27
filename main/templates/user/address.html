@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main class="container mt-5">
+    <div class="w-50">
+	<h1>Address Book <a class="btn  btn-success float-end  text-white" href="{% url 'add-address' %}">Add Address</a></h1>
+    </div>
+	<div class="row">
+		<div class="col-md-3">
+			{% include 'user/user-sidebar.html' %}
+		</div>
+		<div class="col-md-9">
+            <div class="row">
+                {% for add in addBook %}
+                <div class="col-md-4">
+                    <div class="card {% if add.status %} border-secondary shadow {% endif %} mb-5 address{{add.id}} address">
+                        <div class="card-body">{{add.address}}</div>
+                        {% if add.status %}
+                        <div class="card-footer"><p class="text-white bg-success check{{add.id}} check">Activated</p>
+                        <button style="display:none;" data-address="{{add.id}}" class="btn btn-sm btn-info activate-address btn{{add.id}} actbtn">Activate</button>
+                        </div>
+                        {% else %}
+                        <div class="card-footer footer{{add.id}}">
+                        <p style="display:none;" class="text-white bg-success check{{add.id}} check">Activated</p>
+                        <button data-address="{{add.id}}" class="btn btn-sm btn-info activate-address btn{{add.id}} actbtn">Activate</button>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+		</div>
+    </div>
+</main>
+<script type="text/javascript" src="{% static 'custom.js' %}"></script>
+{% endblock %}

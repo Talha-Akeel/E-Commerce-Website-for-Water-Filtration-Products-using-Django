@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main class="container mt-5">
+    <div class="row">
+        <h3>Signup</h3>
+        <form action="" method="post">
+            {% csrf_token %}
+            <label for="username">User Name</label>
+            <input type="text" placeholder="Please Enter User Name" id="username" name="username" /> <br>
+            <label for="email">Email</label>
+            <input type="email" placeholder="Please Enter Email" id="email" name="email" /><br>
+            <label for="password">Password</label>
+            <input type="password" placeholder="Please Enter password" id="password" name="password" /><br>
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" placeholder="Please Re-Enter Password" id="confirmPassword" name="confirmPassword" /><br>
+            <button type="submit">Signup</button><br>
+            <a href="{% url 'login' %}">I already have an account</a>
+        </form>
+    </div>
+</main>
+{% endblock %}

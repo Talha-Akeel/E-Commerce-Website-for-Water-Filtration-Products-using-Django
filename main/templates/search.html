@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-8">
+      <h1 class=text-center><span class="text-muted">Searched Results for</span> "{{request.GET.q}}"</h1>
+    </div>
+    <div class="col-4">
+      <form class="d-flex" action="/search">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search" />
+          <button class="btn btn-success" type="submit" id="button-addon2">Search</button>
+        </div>
+      </form>
+    </div>
+    
+  </div>
+  <hr class="hr">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for product in data %}
+    <div class="col">
+      <div class="product-card card">
+        <a href=""><img src="/media/{{product.image}}" class="card-img-top" alt="{{product.product_name}}"></a>
+        <div class="card-body">
+          <h5 class="card-title"><a href="">{{product.product_name}}</a></h5>
+          <p class="card-text">RS : 100</p>
+          <a href="#" class="btn btn-primary">Add to Cart</a>
+          <a href="#" class="btn btn-primary">Add to Wishlist</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    </div>
+    <div class="row d-flex justify-content-center mb-5 mt-5">
+      <a href="/product-list/"><button class="btn btn-primary w-25">All Products ------></button></a>
+    </div>
+</div>
+
+{% endblock %}

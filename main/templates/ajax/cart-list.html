@@ -1,0 +1,45 @@
+<!-- Featured Products -->
+<h3 class="my-4 border-bottom pb-1">Cart({{totalItems}})</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product_id,item in cart_data.items %}
+        <tr>
+            <td>
+                <img src="/media/{{item.productImage}}" width="50" />
+                <p><a href="/product-detail/{{item.productName|slugify}}/{{product_id}}">{{item.productName}}</a></p>
+            </td>
+            <td>
+                <input class="product-quantity-{{product_id}}" type="number" value="{{item.qty}}" style="vertical-align: bottom;" />
+                <button class="btn btn-sm btn-primary update-item" data-item="{{product_id}}">Update</button>
+                <button class="btn btn-sm btn-danger delete-item" data-item="{{product_id}}">Delete</button>
+            </td>
+            <td>Rs : {{item.productPrice}}</td>
+            <td>Rs : {% widthratio item.productPrice 1 item.qty %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2"></td>
+            <th>Total</th>
+            <th>Rs : {{total_amount}}</th>
+        </tr>
+        
+        {% if totalItems %}
+			<tr>
+				<td colspan="4" align="right">
+					<a href="" class="btn btn-dark btn-sm">Checkout</a>
+				</td>
+			</tr>
+			{% endif %}
+        
+    </tfoot>
+</table>
